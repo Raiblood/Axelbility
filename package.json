@@ -1,0 +1,41 @@
+{
+  "name": "axelbility",
+  "version": "0.2.0",
+  "description": "AI-powered accessibility automation agent",
+  "main": "src/index.js",
+  "bin": {
+    "axelbility": "./bin/cli.js",
+    "axel": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "cli": "node bin/cli.js"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "automation",
+    "axelbility"
+  ],
+  "author": "ramonramosdev",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axe-core": "^4.11.0",
+    "chalk": "^4.1.2",
+    "cheerio": "^1.1.2",
+    "commander": "^14.0.2",
+    "glob": "^13.0.0",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

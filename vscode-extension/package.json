@@ -1,0 +1,83 @@
+{
+  "name": "axelbility-vscode",
+  "displayName": "Axelbility - A11y Checker",
+  "description": "Real-time accessibility checking for HTML files",
+  "version": "0.1.0",
+  "publisher": "ramonramosdev",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "html",
+    "validator"
+  ],
+  "activationEvents": [
+    "onLanguage:html"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "axelbility.auditFile",
+        "title": "Axelbility: Audit Current File"
+      },
+      {
+        "command": "axelbility.fixFile",
+        "title": "Axelbility: Auto-fix Issues"
+      },
+      {
+        "command": "axelbility.auditWorkspace",
+        "title": "Axelbility: Audit Entire Workspace"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "axelbility.auditFile",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
+        "when": "editorTextFocus && editorLangId == html"
+      }
+    ],
+    "configuration": {
+      "title": "Axelbility",
+      "properties": {
+        "axelbility.enableAutoCheck": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic accessibility checking while typing"
+        },
+        "axelbility.strictMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable strict mode (fail on warnings)"
+        },
+        "axelbility.showWarnings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show warning-level issues"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^18.x",
+    "eslint": "^8.x"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
