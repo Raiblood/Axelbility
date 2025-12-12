@@ -4,6 +4,10 @@
   "description": "Real-time accessibility checking for HTML files",
   "version": "0.1.0",
   "publisher": "ramonramosdev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Raiblood/Axelbility.git"
+  },
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
