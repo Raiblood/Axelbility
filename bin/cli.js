@@ -12,7 +12,6 @@ const fs = require('fs');
 const path = require('path');
 const Axelbility = require('../src/index');
 const AxelbilityFixer = require('../src/fixer');
-const AxelbilityReporter = require('../src/reporter');
 
 // Helper: Resolver rutas y encontrar archivos HTML
 function resolveHtmlFiles(inputPath) {
@@ -92,14 +91,14 @@ program
         
         if (results.violations.length > 0 || results.warnings.length > 0) {
           filesWithIssues++;
-        }
-
-        if (options.report === 'html') {
-          await AxelbilityReporter.generateHtmlReport(results);
-        } else if (options.report === 'json') {
-          await AxelbilityReporter.generateJsonReport(results);
-        } else {
-          AxelbilityReporter.printConsoleReport(results);
+          // Imprimir resultados de este archivo
+          if (results.violations.length > 0) {
+            console.log(chalk.red(`\n❌ ${path.basename(file)}: ${results.violations.length} violaciones`));
+            results.violations.forEach(v => console.log(chalk.dim(`   - ${v.rule}: ${v.element}`)));
+          }
+          if (results.warnings.length > 0) {
+            console.log(chalk.yellow(`\n⚠️  ${path.basename(file)}: ${results.warnings.length} advertencias`));
+          }
         }
       }
 
