@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
-const Axelbility = require('../src/index');
+const Axelbility = require('axelbility');
 
 let diagnosticCollection;
 
@@ -168,7 +168,8 @@ async function fixDocument(editor) {
     await fs.writeFile(tempPath, text);
 
     // Ejecutar fixer
-    const AxelbilityFixer = require('../src/fixer');
+    
+    const { AxelbilityFixer } = require('axelbility');
     const auditor = new Axelbility();
     const results = await auditor.auditFile(tempPath);
     

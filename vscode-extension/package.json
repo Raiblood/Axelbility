@@ -82,6 +82,7 @@
     "eslint": "^8.x"
   },
   "dependencies": {
+    "axelbility": "file:../",
     "cheerio": "^1.0.0"
   }
 }

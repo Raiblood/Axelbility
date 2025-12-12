@@ -15,6 +15,15 @@ class Axelbility {
       fixes: [],
       warnings: []
     };
+    this.isHtmlFragment = false; // Nuevo: flag para fragmentos
+  }
+
+  /**
+   * Verificar si el contenido es un fragmento HTML (sin DOCTYPE)
+   */
+  _checkIfFragment(htmlContent) {
+    const trimmed = htmlContent.trim().toLowerCase();
+    return !trimmed.startsWith('<!doctype');
   }
 
   /**
@@ -27,6 +36,9 @@ class Axelbility {
       // Leer archivo
       const html = await fs.readFile(filePath, 'utf-8');
 
+      // Detectar si es fragmento
+      this.isHtmlFragment = this._checkIfFragment(html);
+
       // Parsear HTML
       const $ = cheerio.load(html);
 
@@ -37,8 +49,13 @@ class Axelbility {
       await this.checkHeadingOrder($);
       await this.checkButtonTypes($);
       await this.checkFormLabels($);
-      await this.checkPageTitle($);
-      await this.checkDocumentLang($);
+
+      // Solo para documentos completos (con DOCTYPE)
+      if (!this.isHtmlFragment) {
+        await this.checkPageTitle($);
+        await this.checkDocumentLang($);
+      }
+
       await this.checkLandmarks($);
       await this.checkLinkText($);
       await this.checkTabIndex($);
@@ -49,6 +66,7 @@ class Axelbility {
 
       return {
         file: filePath,
+        isFragment: this.isHtmlFragment,
         passed: this.results.violations.length === 0,
         violations: this.results.violations,
         fixes: this.results.fixes,

@@ -1,0 +1,17 @@
+../**
+!../src/**
+!../package.json
+.vscode/**
+.vscode-test/**
+test/**
+.gitignore
+.yarnrc
+vsc-extension-quickstart.md
+**/jsconfig.json
+**/*.map
+**/.eslintrc.json
+node_modules/**/test/**
+node_modules/**/.git/**
+node_modules/**/docs/**
+node_modules/**/examples/**
+node_modules/**/node_modules/**
